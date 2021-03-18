@@ -1,0 +1,78 @@
+server:
+  port: 8090
+  servlet:
+    contextPath: /mcweb
+
+spring:
+  application:
+    name: mcweb
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/mcweb
+    username: root
+    password:
+    initialization-mode: always
+    schema: classpath:/sql/schema.sql
+
+    continue-on-error: true    
+  liquibase:
+    change-log: classpath:/liquibase/changelog.sql
+#  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    username: slwebmailtest@gmail.com
+#    password: yurirusanov
+#    smtp.starttls.enable: true
+#    smtp.auth: true
+#    smtp.starttls.required: true
+  token:
+    jwtSecret: secret-key
+    jwtExpiration: 300000 #3 days
+    jwtExpirationEmail: 300000 #3 days
+    jwtExpirationPasswordReset: 10800 #3 hours
+#    jwtExpirationQuestionnaire: 15778463 #6 months
+logging:
+  pattern:
+    console: '%clr(%d{yy-MM-dd E HH:mm:ss.SSS}){blue} %clr(%-5p) %clr(${PID}){faint}
+      %clr(---){faint} %clr([%10.10t]){cyan} %clr(%-40.40logger{38}.%-3.3line){blue}
+      %clr(:){red} %clr(%m){faint}%n'
+  level:
+    liquibase: info
+    org:
+      hibernate:
+        engine:
+          jdbc:
+            env:
+              internal:
+                LobCreatorBuilderImpl: error
+      springframework.data: debug
+      springframework.security: debug
+      springframework: info
+    com.mcweb: debug
+    
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      
+      exposure:
+        include:
+        - metrics
+        - refresh
+        - info
+        - health
+        - shutdown
+        - scheduledtasks
+  endpoint:
+    health:
+      show-details: ALWAYS
+    
+#slweb:
+#  analysis_root: ./analysis
+    
