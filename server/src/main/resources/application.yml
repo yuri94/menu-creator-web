@@ -19,23 +19,12 @@ spring:
     password:
     initialization-mode: always
     schema: classpath:/sql/schema.sql
-
-    continue-on-error: true    
+    continue-on-error: true
   liquibase:
     change-log: classpath:/liquibase/changelog.sql
-#  mail:
-#    host: smtp.gmail.com
-#    port: 587
-#    username: slwebmailtest@gmail.com
-#    password: yurirusanov
-#    smtp.starttls.enable: true
-#    smtp.auth: true
-#    smtp.starttls.required: true
   token:
     jwtSecret: secret-key
     jwtExpiration: 300000 #3 days
-    jwtExpirationEmail: 300000 #3 days
-    jwtExpirationPasswordReset: 10800 #3 hours
 #    jwtExpirationQuestionnaire: 15778463 #6 months
 logging:
   pattern:
